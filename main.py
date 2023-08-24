@@ -51,14 +51,20 @@ while is_on:
    choice = input("What world you like ? (espresso/latte/cappuccino) ")
    if  choice =="off":
        is_on=False
+       print("The shop is closed...See you soon")
    elif choice =="report":
        print(f"Water: {resource['water']}ml")
        print(f"Milk : {resource['milk']}ml")
        print(f"coffee: {resource['coffee']}g")
        print(f"money: ${profit}")
+   elif choice=="refill":
+      for item in resource:
+          resource[item]+=200
+      print("Resouces are refilled")
    else:
        drink = MENU[choice]
        if is_resouces_available(drink["ingredients"]):
+           print(f"Your total Bill is ${drink['cost']}")
            payment = process_coins()
            if is_transection_successful(payment,drink["cost"]):
                make_coffee(choice,drink["ingredients"])
